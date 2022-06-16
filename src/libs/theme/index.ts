@@ -5,7 +5,7 @@ import type { GlobalStyleProps } from '@chakra-ui/theme-tools';
 const theme = extendTheme({
   config: {
     useSystemColorMode: false,
-    initialColorMode: 'light',
+    initialColorMode: 'dark',
   },
   styles: {
     global: (props: GlobalStyleProps) => ({
@@ -18,8 +18,8 @@ const theme = extendTheme({
     }),
   },
   fonts: {
-    heading: 'MonoLisa Bold, sans-serif',
-    body: 'MonoLisa, sans-serif',
+    heading: 'Roboto Mono, MonoLisa Bold, sans-serif',
+    body: 'Roboto Mono, MonoLisa, sans-serif',
   },
 });
 

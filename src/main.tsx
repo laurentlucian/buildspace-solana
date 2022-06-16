@@ -5,6 +5,8 @@ import App from './App';
 import theme from './libs/theme';
 import Fonts from './libs/fonts';
 import { BrowserRouter } from 'react-router-dom';
+import '@fontsource/roboto-mono/400.css';
+import '@fontsource/roboto-mono/700.css';
 import './main.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

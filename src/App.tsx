@@ -173,7 +173,7 @@ const App = () => {
               }}
             >
               <HStack>
-                <Input type="text" placeholder="Enter gif link!" value={inputValue} onChange={onInputChange} />
+                <Input type="text" placeholder="GIF link" value={inputValue} onChange={onInputChange} />
                 <Button type="submit">Submit</Button>
               </HStack>
             </FormControl>
