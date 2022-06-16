@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Flex, FormControl, Heading, HStack, Img, Input, SimpleGrid, Stack, Text } from '@chakra-ui/react';
 import { Connection, PublicKey, clusterApiUrl } from '@solana/web3.js';
 import { Program, AnchorProvider as Provider, web3, Wallet } from '@project-serum/anchor';
@@ -40,7 +40,7 @@ const App = () => {
   const [inputValue, setInputValue] = useState('');
   const [gifList, setGifList] = useState<{ gifLink: string; userAddress: string }[] | null>([]);
 
-  const onInputChange = (event: any) => {
+  const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setInputValue(value);
   };
@@ -60,12 +60,11 @@ const App = () => {
         // @ts-ignore
         const program = new Program(idl, programID, provider);
 
-        await program.rpc.addGif(inputValue, {
-          accounts: {
-            baseAccount: baseAccount.publicKey,
-            user: provider.wallet.publicKey,
-          },
-        });
+        await program.methods
+          .addGif(inputValue)
+          .accounts({ baseAccount: baseAccount.publicKey, user: provider.wallet.publicKey })
+          .rpc();
+
         console.log('GIF succesfully sent to program', inputValue);
         getGifList();
       } catch (e) {
@@ -110,14 +109,16 @@ const App = () => {
       // @ts-ignore
       const program = new Program(idl, programID, provider);
 
-      await program.rpc.startStuffOff({
-        accounts: {
+      await program.methods
+        .startStuffOff()
+        .accounts({
           baseAccount: baseAccount.publicKey,
           user: provider.wallet.publicKey,
           systemProgram: SystemProgram.programId,
-        },
-        signers: [baseAccount],
-      });
+        })
+        .signers([baseAccount])
+        .rpc();
+
       console.log('Created a new BaseAccount w/ address:', baseAccount.publicKey.toString());
       await getGifList();
     } catch (error) {
