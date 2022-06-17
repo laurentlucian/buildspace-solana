@@ -13,7 +13,6 @@ const theme = extendTheme({
         color: mode('#161616', '#EEE6E2')(props),
         bg: mode('#EEE6E2', '#131415')(props),
         lineHeight: 'base',
-        height: '100vh',
       },
     }),
   },
